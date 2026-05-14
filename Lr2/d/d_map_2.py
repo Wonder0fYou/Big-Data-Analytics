@@ -5,17 +5,20 @@ def mapper():
     """
     Mapper 2-й фазы
 
-    Вход: 1 (от Reducer 1)
+    Вход: 1
     Выход: count\t1
 
-    Отправляет единички на финальный счетчик.
+    Присваивает единый ключ "count" всем единицам
+    направляя их на один финальный reducer
     """
     for line in sys.stdin:
         line = line.strip()
         if not line:
             continue
+        if line != "1":
+            continue
 
-        print(f"count\t{line}")
+        print(f"count\t1")
 
 
 if __name__ == "__main__":

@@ -6,9 +6,9 @@ def reducer():
     Reducer 2-й фазы
 
     Вход: count\t1
-    Выход: <итоговое_количество>
+    Выход: <количество_различных_целых_чисел>
 
-    Просто суммирует все поступившие единицы.
+    Суммирует все единицы
     """
     total_unique = 0
 
@@ -17,8 +17,14 @@ def reducer():
         if not line:
             continue
 
-        _, val = line.split('\t', 1)
-        total_unique += int(val)
+        parts = line.split('\t', 1)
+        if len(parts) != 2:
+            continue
+
+        try:
+            total_unique += int(parts[1])
+        except ValueError:
+            continue
 
     print(total_unique)
 

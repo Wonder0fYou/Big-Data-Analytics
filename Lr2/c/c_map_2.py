@@ -8,11 +8,16 @@ def mapper():
     Вход: <уникальное_число>
     Выход: distinct\t<уникальное_число>
 
-    Собирает все уникальные числа в один поток
+    Присваивает всем уникальным числам единый ключ "distinct"
+    объединяя результаты всех reducer'ов фазы 1
     """
     for line in sys.stdin:
         line = line.strip()
         if not line:
+            continue
+        try:
+            int(line)
+        except ValueError:
             continue
 
         print(f"distinct\t{line}")

@@ -5,10 +5,11 @@ def reducer():
     """
     Reducer 1-й фазы
 
-    Вход: <bucket_id>\t<число>
-    Выход: <локальная_сумма>\t<локальное_количество>
+    Вход: <bucket_id>\t<целое_число>
+    Выход: <local_sum>\t<local_count>
 
-    Считает сумму и количество элементов внутри своей партиции.
+    Накапливает частичную сумму (local_sum) и счётчик
+    (local_count) за один линейный проход.
     """
     local_sum = 0
     local_count = 0
@@ -18,9 +19,15 @@ def reducer():
         if not line:
             continue
 
-        _, value_str = line.split('\t', 1)
-        local_sum += int(value_str)
-        local_count += 1
+        parts = line.split('\t', 1)
+        if len(parts) != 2:
+            continue
+
+        try:
+            local_sum += int(parts[1])
+            local_count += 1
+        except ValueError:
+            continue
 
     if local_count > 0:
         print(f"{local_sum}\t{local_count}")

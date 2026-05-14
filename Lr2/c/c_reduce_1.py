@@ -3,13 +3,12 @@ import sys
 
 def reducer():
     """
-    Reducer 1-й фазы
+    Reducer фазы 1
 
     Вход: <число>\t1
-    Выход: 1
+    Выход: <уникальное_число>
 
-    При смене ключа выводит "1" сигнал о том, что
-    обнаружено новое уникальное число
+    Выводит ключ только один раз при его смене
     """
     prev_key = None
 
@@ -25,7 +24,7 @@ def reducer():
         key = parts[0]
 
         if key != prev_key:
-            print("1")
+            print(key)
             prev_key = key
 
 

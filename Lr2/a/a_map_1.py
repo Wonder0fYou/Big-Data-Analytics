@@ -9,15 +9,14 @@ def mapper():
     Вход: <число>
     Выход: <bucket_id>\t<число>
 
-    Читает строки, проверяет, что это целые числа.
-    Для распределения нагрузки каждому числу
-    присваивается ключ корзины на основе остатка от деления
+    Распределяет числа по NUM_BUCKETS корзинам по ключу
+    abs(n) % NUM_BUCKETS, чтобы обеспечить равномерную
+    нагрузку на reducerы
     """
     for line in sys.stdin:
         line = line.strip()
         if not line:
             continue
-
         try:
             number = int(line)
         except ValueError:
@@ -25,6 +24,7 @@ def mapper():
 
         bucket_id = abs(number) % NUM_BUCKETS
         print(f"{bucket_id}\t{number}")
+
 
 if __name__ == "__main__":
     mapper()
